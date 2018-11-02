@@ -97,7 +97,6 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/drawImage", "anon");
         filterChainDefinitionMap.put("/loginUser","anon");
         filterChainDefinitionMap.put("/druid/**","anon");
-        filterChainDefinitionMap.put("/admin/**","authc,roles[admin]");
         filterChainDefinitionMap.put("/static/**","anon");
         filterChainDefinitionMap.put("/**","authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

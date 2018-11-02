@@ -1,4 +1,4 @@
-<@com.head title="">
+<head>
 <base id="base" href="${basePath!}/">
 <meta http-equiv="Access-Control-Allow-Origin" content="*">
 <link href="${basePath!}/static/layui/css/layui.css" type="text/css" media="screen" rel="stylesheet"/>
@@ -319,8 +319,8 @@
 
 </script>
 
-</@com.head>
-<@com.body>
+</head>
+<body>
 
 <div  id="setpermisdiv" class="layui-fluid" >
     <ul id="treeDemo" class="ztree"></ul>
@@ -371,4 +371,4 @@
 
 
 
-</@com.body>
+</body>

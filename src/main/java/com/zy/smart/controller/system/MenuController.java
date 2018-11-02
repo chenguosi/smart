@@ -20,15 +20,15 @@ import java.util.Map;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 
 @Controller
-@RequestMapping("/admin/menu")
+@RequestMapping("admin/menu")
 public class MenuController {
 
     @Autowired
     private AuthorService authorService;
 
-    @RequestMapping("/toUserManage")
+    @RequestMapping("/toMenuManage")
     @RequiresPermissions(value = {"菜单管理"})
-    public String toUserManage() {
+    public String toMenuManage() {
         return "power/menu";
     }
 
