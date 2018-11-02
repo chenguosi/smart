@@ -64,4 +64,53 @@ public class AuthorServiceImpl implements AuthorService {
         return count;
     }
 
+    @Override
+    public List<Tmenu> selectMenuByPid(Integer parentId) {
+        List<Tmenu> list = authorMapper.selectMenuByPid(parentId);
+        return list;
+    }
+
+    @Override
+    public Tmenu selectMenuById(Integer id) {
+        Tmenu tmenu = authorMapper.selectMenuById(id);
+        return tmenu;
+    }
+
+    @Override
+    public List<Tmenu> selectMenuByName(String name) {
+        List<Tmenu> list = authorMapper.selectMenuByName(name);
+        return list;
+    }
+
+    @Override
+    public List<Tmenu> selectMenuByPidDesc(Integer pid) {
+        List<Tmenu> list = authorMapper.selectMenuByPidDesc(pid);
+        return list;
+    }
+
+    @Override
+    public void saveMenu(Tmenu tmenu) {
+        authorMapper.saveMenu(tmenu);
+    }
+
+    @Override
+    public void updateMenu(Tmenu tmenuNew) {
+        authorMapper.updateMenu(tmenuNew);
+    }
+
+    @Override
+    public void deleteRoleMenu(Integer id) {
+        authorMapper.deleteRoleMenu(id);
+    }
+
+    @Override
+    public void deleteMenuByPid(Integer id) {
+        authorMapper.deleteMenuByPid(id);
+    }
+
+    @Override
+    public void deleteMenuById(Integer id) {
+        authorMapper.deleteMenuById(id);
+    }
+
 }

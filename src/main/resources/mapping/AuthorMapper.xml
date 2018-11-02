@@ -8,7 +8,48 @@
         <result column="account" property="account" jdbcType="VARCHAR"></result>
         <result column="password" property="password" jdbcType="VARCHAR"></result>
     </resultMap>
-    
+
+    <insert id="saveMenu">
+        insert into t_menu
+        (
+        icon,
+        name,
+        state,
+        url,
+        p_id
+        ) values (
+        #{icon,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR},
+        #{state,jdbcType=INTEGER},
+        #{url,jdbcType=VARCHAR},
+        #{pId,jdbcType=INTEGER}
+        )
+    </insert>
+
+    <update id="updateMenu">
+        update t_menu set
+        icon = #{icon,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        state = #{state,jdbcType=INTEGER},
+        url = #{url,jdbcType=VARCHAR},
+        p_id = #{pId,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteRoleMenu">
+        delete from t_role_menu
+        where menu_id = #{id}
+    </delete>
+
+    <delete id="deleteMenuByPid">
+        delete from t_menu
+        where p_id = #{id}
+    </delete>
+
+    <delete id="deleteMenuById">
+        delete from t_menu
+        where id = #{id}
+    </delete>
+
     <select id="findUserByAccount" resultMap="userMap">
         select
         id,
@@ -92,6 +133,63 @@
         <where>
             p_id = #{id,jdbcType=INTEGER}
         </where>
+    </select>
+
+    <select id="selectMenuByPid" resultType="com.zy.smart.domain.system.Tmenu">
+        select
+        id,
+        icon,
+        name,
+        state,
+        url,
+        p_id
+        from t_menu
+        <where>
+            p_id = #{parentId,jdbcType=INTEGER}
+        </where>
+    </select>
+
+    <select id="selectMenuById" resultType="com.zy.smart.domain.system.Tmenu">
+        select
+        id,
+        icon,
+        name,
+        state,
+        url,
+        p_id
+        from t_menu
+        <where>
+            id = #{id,jdbcType=INTEGER}
+        </where>
+    </select>
+
+    <select id="selectMenuByName" resultType="com.zy.smart.domain.system.Tmenu">
+        select
+        id,
+        icon,
+        name,
+        state,
+        url,
+        p_id
+        from t_menu
+        <where>
+            name = #{name,jdbcType=VARCHAR}
+        </where>
+    </select>
+
+    <select id="selectMenuByPidDesc" resultType="com.zy.smart.domain.system.Tmenu">
+        select
+        id,
+        icon,
+        name,
+        state,
+        url,
+        p_id
+        from t_menu
+        <where>
+            p_id = #{parentId,jdbcType=INTEGER}
+        </where>
+        order by id desc
     </select>
 
 </mapper>

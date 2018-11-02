@@ -21,4 +21,22 @@ public interface AuthorMapper {
     List<Tmenu> selectByParentIdAndAccount(HashMap<String, Object> paraMap);
 
     int selectChildCount(@Param("id") int id);
+
+    List<Tmenu> selectMenuByPid(@Param("parentId") Integer parentId);
+
+    Tmenu selectMenuById(@Param("id") Integer id);
+
+    List<Tmenu> selectMenuByName(@Param("name") String name);
+
+    List<Tmenu> selectMenuByPidDesc(Integer pid);
+
+    void saveMenu(Tmenu tmenu);
+
+    void updateMenu(Tmenu tmenuNew);
+
+    void deleteRoleMenu(@Param("id") Integer id);
+
+    void deleteMenuByPid(@Param("id") Integer id);
+
+    void deleteMenuById(@Param("id") Integer id);
 }
