@@ -137,7 +137,7 @@
 
             $.ajax({
                 type: "POST",
-                url:"admin/menu/deletemenu",
+                url:"admin/menu/deleteMenu",
                 data:{id:treeNode.id},
                 async: false,
                 error: function(request) {
@@ -239,7 +239,7 @@
 
             $.ajax({
                 type: "POST",
-                url:"admin/menu/addupdatemenu",
+                url:"admin/menu/modifyMenu",
                 data:$('#addeditformid').serialize(),
                 async: false,
                 error: function(request) {

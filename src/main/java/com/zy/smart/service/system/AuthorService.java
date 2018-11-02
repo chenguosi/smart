@@ -20,4 +20,22 @@ public interface AuthorService {
     List<Tmenu> selectByParentIdAndAccount(HashMap<String, Object> paraMap);
 
     int selectChildCount(int id);
+
+    List<Tmenu> selectMenuByPid(Integer parentId);
+
+    Tmenu selectMenuById(Integer id);
+
+    List<Tmenu> selectMenuByName(String name);
+
+    List<Tmenu> selectMenuByPidDesc(Integer pid);
+
+    void saveMenu(Tmenu tmenu);
+
+    void updateMenu(Tmenu tmenuNew);
+
+    void deleteRoleMenu(Integer id);
+
+    void deleteMenuByPid(Integer id);
+
+    void deleteMenuById(Integer id);
 }
