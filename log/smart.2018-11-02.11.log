@@ -1,0 +1,17 @@
+2018-11-02 10:44:53,034 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6030(Integer)
+2018-11-02 10:44:53,039 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2018-11-02 10:44:53,040 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: select count(0) from t_menu WHERE p_id = ? 
+2018-11-02 10:44:53,040 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6040(Integer)
+2018-11-02 10:44:53,042 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2018-11-02 10:44:53,043 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: select count(0) from t_menu WHERE p_id = ? 
+2018-11-02 10:44:53,044 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6050(Integer)
+2018-11-02 10:44:53,046 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2018-11-02 10:44:53,047 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: select count(0) from t_menu WHERE p_id = ? 
+2018-11-02 10:44:53,049 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 61(Integer)
+2018-11-02 10:44:53,050 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2018-11-02 10:44:53,051 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: select tm.id, tm.icon, tm.name, tm.state, tm.url, tm.p_id pId from t_user_role tur inner join t_role_menu trm on tur.role_id = trm.role_id inner join t_menu tm on trm.menu_id = tm.id WHERE tur.account = ? AND tm.p_id = ? 
+2018-11-02 10:44:53,052 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: admin(String), 61(Integer)
+2018-11-02 10:44:53,054 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2018-11-02 10:44:53,055 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: select count(0) from t_menu WHERE p_id = ? 
+2018-11-02 10:44:53,056 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6100(Integer)
+2018-11-02 10:44:53,057 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zy.smart.mapper.system.AuthorMapper">
+
+    <resultMap id="userMap" type="com.zy.smart.domain.system.Tuser">
+        <result column="id" property="id" jdbcType="INTEGER"></result>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"></result>
+        <result column="account" property="account" jdbcType="VARCHAR"></result>
+        <result column="password" property="password" jdbcType="VARCHAR"></result>
+    </resultMap>
+    
+    <select id="findUserByAccount" resultMap="userMap">
+        select
+        id,
+        user_name,
+        account,
+        password
+        from t_user
+        <where>
+            account = #{account,jdbcType=VARCHAR}
+        </where>
+    </select>
+
+    <select id="findRoleByAccount" resultType="com.zy.smart.domain.system.Trole">
+        select
+        tr.id,
+        tr.name roleName,
+        tr.remark
+        from t_user_role tur inner join t_role tr
+        on tur.role_id = tr.id
+        <where>
+            tur.account = #{account,jdbcType=VARCHAR}
+        </where>
+    </select>
+
+    <select id="findMenuByAccount" resultType="com.zy.smart.domain.system.Tmenu">
+        select
+        tm.id,
+        tm.icon,
+        tm.name,
+        tm.state,
+        tm.url,
+        tm.p_id pId
+        from
+        t_user_role tur
+        inner join t_role_menu trm
+        on tur.role_id = trm.role_id
+        inner join t_menu tm
+        on trm.menu_id = tm.id
+        <where>
+            tur.account = #{account,jdbcType=VARCHAR}
+        </where>
+    </select>
+
+    <select id="findMenuOneClass" resultType="com.zy.smart.domain.system.Tmenu">
+        select
+        id,
+        icon,
+        name,
+        state,
+        url,
+        p_id
+        from t_menu
+        <where>
+            p_id = 1
+        </where>
+    </select>
+
+    <select id="selectByParentIdAndAccount" resultType="com.zy.smart.domain.system.Tmenu">
+        select
+        tm.id,
+        tm.icon,
+        tm.name,
+        tm.state,
+        tm.url,
+        tm.p_id pId
+        from
+        t_user_role tur
+        inner join t_role_menu trm
+        on tur.role_id = trm.role_id
+        inner join t_menu tm
+        on trm.menu_id = tm.id
+        <where>
+            tur.account = #{account,jdbcType=VARCHAR}
+            AND tm.p_id = #{pid,jdbcType=INTEGER}
+        </where>
+    </select>
+
+    <select id="selectChildCount" resultType="java.lang.Integer">
+        select count(0)
+        from t_menu
+        <where>
+            p_id = #{id,jdbcType=INTEGER}
+        </where>
+    </select>
+
+</mapper>
