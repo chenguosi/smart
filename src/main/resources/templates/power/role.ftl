@@ -101,14 +101,14 @@
                 },
                 success: function(data) {
                     if(data.state=='fail'){
-                        layer.alert(data.mesg);
+                        layer.alert(data.msg);
                     }
                     if(data.state=='success'){
                         layer.open({
                             skin: 'layui-layer-molv',
                             type:1,
                             area:"10%",
-                            content:data.mesg,
+                            content:data.msg,
                             shadeClose:true,
                             end: function(){
                                 layer.close(layerid);
@@ -128,77 +128,6 @@
         });
     </script>
 </div>
-
-
-
-
-
-
-<#--&lt;#&ndash;字段权限设置弹窗&ndash;&gt;
-<div  id="setcolumnspermisdiv" hidden="" class="layui-fluid" >
-    <ul id="columnstreeDemo" class="ztree"></ul>
-    <button class="layui-btn" id="savesetcolumnspermis">保存字段权限设置</button>
-    <button class="layui-btn" id="closesetcolumnspermis">关闭</button>
-    <script type="text/javascript">
-        $('#savesetcolumnspermis').on('click', function () {
-
-            var id = jQuery("#list2").jqGrid('getGridParam', 'selrow');//jqgrid逻辑id，不是业务表单的主键字段id,这里要注意
-            var ret = jQuery("#list2").jqGrid('getRowData', id);//通过jqgrid的逻辑id获取该行数据，通过数据对象ret来获取表单主键字段ret.id
-
-
-            var nodes = zTreeObj2.getCheckedNodes(true);
-            var permisArrIds=[];
-            for(var i=0;i<nodes.length;i++){
-                permisArrIds.push(nodes[i].id);
-            }
-            var permisIds=permisArrIds.join(",");
-            alert(permisIds);
-
-            $.ajax({
-                type: "POST",
-                url:"admin/role/saveColumnsSet",
-                data:{permisIds:permisIds,roleId:ret.id},
-                async: false,
-                    error: function(request) {
-                        layer.alert("与服务器连接失败/(ㄒoㄒ)/~~");
-                    },
-                    success: function(data) {
-                    if(data.state=='fail'){
-                        layer.alert(data.mesg);
-                    }
-                    if(data.state=='success'){
-                        layer.open({
-                            skin: 'layui-layer-molv',
-                            type:1,
-                            area:"10%",
-                            content:data.mesg,
-                            shadeClose:true,
-                            end: function(){
-                                layer.close(layerid);
-                                jQuery("#list2").jqGrid().trigger("reloadGrid");//重新加载数据
-                            }
-                        });
-
-                    }
-                }
-            });
-
-
-
-
-
-
-        });
-        $('#closesetcolumnspermis').on('click', function () {
-            layer.close(layerid);
-        });
-    </script>
-</div>-->
-
-
-
-
-
 </body>
 </html>
 
@@ -238,7 +167,7 @@
 
             $.ajax({
                 type: "POST",
-                url:"admin/role/addupdaterole",
+                url:"admin/role/modifyRole",
                 data:$('#addeditformid').serialize(),
                 async: false,
                 error: function(request) {
@@ -246,14 +175,14 @@
                 },
                 success: function(data) {
                     if(data.state=='fail'){
-                        layer.alert(data.mesg);
+                        layer.alert(data.msg);
                     }
                     if(data.state=='success'){
                         layer.open({
                             skin: 'layui-layer-molv',
                             type:1,
                             area:"10%",
-                            content:data.mesg,
+                            content:data.msg,
                             shadeClose:true,
                             end: function(){
                                 layer.close(layerid);
@@ -287,14 +216,14 @@
                 },
                 success: function(data) {
                     if(data.state=='fail'){
-                        layer.alert(data.mesg);
+                        layer.alert(data.msg);
                     }
                     if(data.state=='success'){
                         layer.open({
                             skin: 'layui-layer-molv',
                             type:1,
                             area:"10%",
-                            content:data.mesg,
+                            content:data.msg,
                             shadeClose:true,
                             end: function(){
                                 layer.close(layerid);
@@ -340,7 +269,7 @@
                         //请求后台，执行删除操作
                         $.ajax({
                             type: "POST",
-                            url:"admin/role/deleterole",
+                            url:"admin/role/deleteRole",
                             data:{id:ret.id},
                             async: false,
                             error: function(request) {
@@ -348,7 +277,7 @@
                             },
                             success: function(data) {
                                 if(data.state=='fail'){
-                                    layer.alert(data.mesg);
+                                    layer.alert(data.msg);
                                 }
                                 if(data.state=='success'){
                                     //打开成功消息提示
@@ -356,7 +285,7 @@
                                         skin: 'layui-layer-molv',
                                         type:1,
                                         area:"10%",
-                                        content:data.mesg,
+                                        content:data.msg,
                                         shadeClose:true,
                                         end: function(){
                                             layer.close(layerid);//消息提示结束后回调，关闭上一级新建表单所在弹层
@@ -398,7 +327,7 @@
                     },
                     success: function(data) {
                         if(data.state=='fail'){
-                            layer.alert(data.mesg);
+                            layer.alert(data.msg);
                             return false;
                         }
                         if(data.state=='success'){
@@ -440,15 +369,15 @@
                     {
                         caption: "角色管理",//表格的标题名字
                         mtype: "post",//向后台请求数据的ajax的类型。可选post,get
-                        url: 'admin/role/list',
+                        url: 'admin/role/getRoleList',
                         //url : 'static/jqgrid/data/JSONData.json',//组件创建完成之后请求数据的url
                         //styleUI: 'Bootstrap',
                         datatype: "json",//请求数据返回的类型。可选json,xml,txt
                         emptyrecords: "当前无记录",
                         colNames: ['ID', '角色名称', '备注', '权限菜单设置'],//jqGrid的列显示名字
                         colModel: [  //这里会根据index去解析jsonReader中root对象的属性，填充cell
-                            {name: 'id', index: 'id', width: 100, sortable: true, search: false},
-                            {name: 'name', index: 'name', width: 220, sortable: false,search: true,
+                            {name: 'id', index: 'id', width: 100, sortable: false, search: false},
+                            {name: 'roleName', index: 'name', width: 220, sortable: false,search: true,
                                 //被该列搜索时的搜索条件有哪些
                                 searchoptions: {sopt: ['eq']}
                                 /*
@@ -456,7 +385,7 @@
                                 editable: true,
                                 editoptions: {size: "20", maxlength: "30"}//当执行修改和新增的操作时，会显示输入框，输入框的配置*/
                             },
-                            {name: 'bz', index: 'bz', width: 400, sortable: false, search: false},
+                            {name: 'remark', index: 'remark', width: 400, sortable: false, search: false},
                             {name: 'setpermis', index: 'setpermis', align: "center", width: 300, sortable: false, search: false}
                         ],
 
@@ -480,10 +409,10 @@
                         //cellsubmit: "clientArray",
                         //cellEdit:true,//启用或者禁用单元格编辑功能
                         jsonReader: {
-                            root: "datamap",//数据的根节点
-                            page: "currpage",//返回数据的当前页
-                            total: "totalpages",//总页数
-                            records: "totalrecords",//总记录数
+                            root: "dataMap",//数据的根节点
+                            page: "currentPage",//返回数据的当前页
+                            total: "totalPages",//总页数
+                            records: "totalRecords",//总记录数
                             repeatitems: false,// 如果设为false，则jqGrid在解析json时，会根据name来搜索对应的数据元素（即可以json中元素可以不按顺序）；而所使用的name是来自于colModel中的name设定。
                             id: "id"//主键字段名称
                         },

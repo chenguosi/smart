@@ -26,7 +26,8 @@
 		</div>
 		<div class="layui-form-item input-item" id="imgCode">
 			<label for="code">验证码</label>
-			<input type="text" placeholder="请输入验证码" id="imageCode" name="imageCode"  autocomplete="off" id="code" class="layui-input">
+			<input type="text" placeholder="请输入验证码" id="imageCode" name="imageCode"
+				   autocomplete="off" id="code" class="layui-input" maxlength="4">
 			<#--验证码通过接口获取-->
             <img id="imgObj" title="看不清，换一张" src="${basePath!}/drawImage" onclick="changeImg()"/>
 		</div>
@@ -57,6 +58,7 @@
                         window.location.href = "${basePath!}/welcome";
                     } else {
                         layer.alert(result.errorInfo);
+                        changeImg(); // 重置验证码
                     }
                 });
 

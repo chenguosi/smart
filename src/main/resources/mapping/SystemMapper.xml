@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zy.smart.mapper.system.SystemMapper">
+
+    <insert id="insertRole" parameterType="com.zy.smart.domain.system.Trole">
+        insert into t_role
+        (
+        name,
+        remark
+        )values (
+        #{roleName,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="saveRoleMenu">
+        insert into t_role_menu
+        (
+        menu_id,
+        role_id
+        )
+        values (
+        #{menuId,jdbcType=INTEGER},
+        #{roleId,jdbcType=INTEGER}
+        )
+    </insert>
+
+    <insert id="saveUser" parameterType="com.zy.smart.domain.system.Tuser">
+        insert into t_user
+        (
+        account,
+        password,
+        user_name,
+        remark
+        ) values (
+        #{account,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR},
+        #{userName,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertUserRole" parameterType="com.zy.smart.domain.system.TuserRole">
+        insert into t_user_role
+        (
+        role_id,
+        account
+        )
+        values
+        (
+        #{roleId,jdbcType=INTEGER},
+        #{account,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <update id="updateRole" parameterType="com.zy.smart.domain.system.Trole">
+        update t_role set
+        name = #{roleName,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR}
+        <where>
+            id = #{id,jdbcType=INTEGER}
+        </where>
+    </update>
+
+    <update id="updateUser" parameterType="com.zy.smart.domain.system.Tuser">
+        update t_user set
+        password = #{password,jdbcType=VARCHAR},
+        user_name = #{userName,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR}
+        <where>
+            id = #{id,jdbcType=INTEGER}
+        </where>
+    </update>
+
+    <update id="updatePassword" parameterType="com.zy.smart.domain.system.Tuser">
+        update t_user set
+        password = #{password,jdbcType=VARCHAR}
+        <where>
+            id = #{id,jdbcType=INTEGER}
+            AND account = #{account,jdbcType=VARCHAR}
+        </where>
+    </update>
+
+    <delete id="deleteUserRoleByRoleId">
+        delete from t_user_role
+        <where>
+            role_id = #{id,jdbcType=INTEGER}
+        </where>
+    </delete>
+
+    <delete id="deleteMenuRoleByRoleId">
+        delete from t_role_menu
+        <where>
+            role_id = #{id,jdbcType=INTEGER}
+        </where>
+    </delete>
+
+    <delete id="deleteRoleById">
+        delete from t_role
+        <where>
+            id = #{id,jdbcType=INTEGER}
+        </where>
+    </delete>
+
+    <delete id="deleteRoleMenuByParam">
+        delete from t_role_menu
+        <where>
+            role_id = #{roleId,jdbcType=INTEGER}
+            AND menu_id in
+            <foreach collection="menuIdList" open="(" close=")" item="item" separator=",">
+                #{item,jdbcType=INTEGER}
+            </foreach>
+        </where>
+    </delete>
+
+    <delete id="deleteUserRole">
+        delete from t_user_role
+        <where>
+            account = #{account,jdbcType=VARCHAR}
+        </where>
+    </delete>
+
+    <delete id="deleteUser">
+        delete from t_user
+        <where>
+            id = #{id,jdbcType=INTEGER}
+        </where>
+    </delete>
+
+    <select id="queryRolePage" resultType="com.zy.smart.domain.system.Trole">
+        select
+        id,
+        name roleName,
+        remark
+        from t_role
+        <where>
+            <if test="name != null and name != ''">
+                name = #{name,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryRoleByParam" resultType="com.zy.smart.domain.system.Trole">
+        select
+        id,
+        name roleName,
+        remark
+        from t_role
+        <where>
+            name = #{roleName,jdbcType=VARCHAR}
+        </where>
+    </select>
+
+    <select id="queryRoleById" resultType="com.zy.smart.domain.system.Trole">
+        select
+        id,
+        name roleName,
+        remark
+        from t_role
+        <where>
+            id = #{id,jdbcType=INTEGER}
+        </where>
+    </select>
+
+    <select id="queryMenusByRoleId" resultType="com.zy.smart.domain.system.Tmenu">
+        select
+        tm.id,
+        tm.icon,
+        tm.name,
+        tm.state,
+        tm.url,
+        tm.p_id pId
+        from t_role_menu trm
+        inner join t_menu tm
+        on trm.menu_id = tm.id
+        <where>
+            trm.role_id = #{roleId,jdbcType=INTEGER}
+        </where>
+    </select>
+
+    <select id="selectMenuCountByPid" resultType="int">
+        select count(0)
+        from t_menu
+        <where>
+            p_id = #{id,jdbcType=INTEGER}
+        </where>
+    </select>
+
+    <select id="queryMenusByPid" resultType="com.zy.smart.domain.system.Tmenu">
+        select
+        id,
+        icon,
+        name,
+        state,
+        url,
+        p_id pId
+        from t_menu
+        <where>
+            p_id = #{parentId,jdbcType=INTEGER}
+        </where>
+    </select>
+
+    <select id="queryOneMenusByName" resultType="com.zy.smart.domain.system.Tmenu">
+        select
+        id,
+        icon,
+        name,
+        state,
+        url,
+        p_id pId
+        from t_menu
+        <where>
+            name = #{name,jdbcType=INTEGER}
+            AND
+            p_id is null
+        </where>
+    </select>
+
+    <select id="queryUserPage" resultType="com.zy.smart.domain.system.Tuser">
+        select
+        id,
+        account,
+        password,
+        user_name userName,
+        remark
+        from t_user
+        <where>
+            user_name != 'admin'
+            <if test="userName != null and userName != '' ">
+                user_name = #{userName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryRolesByAccount" resultType="com.zy.smart.domain.system.Trole">
+        select
+        tr.id,
+        tr.name roleName,
+        tr.remark
+        from t_user_role tur
+        inner join t_role tr on tur.role_id = tr.id
+        <where>
+            tur.account = #{account,jdbcType=VARCHAR}
+        </where>
+    </select>
+
+    <select id="queryUserByName" resultType="com.zy.smart.domain.system.Tuser">
+        select
+        id,
+        account,
+        password,
+        user_name userName,
+        remark
+        from
+        t_user
+        <where>
+            user_name = #{userName,jdbcType=VARCHAR}
+        </where>
+    </select>
+
+    <select id="queryUserById" resultType="com.zy.smart.domain.system.Tuser">
+        select
+        id,
+        account,
+        password,
+        user_name userName,
+        remark
+        from
+        t_user
+        <where>
+            id = #{id,jdbcType=INTEGER}
+        </where>
+    </select>
+
+    <select id="queryAllRole" resultType="com.zy.smart.domain.system.Trole">
+        select
+        id,
+        name roleName,
+        remark
+        from t_role
+    </select>
+
+    <select id="queryUserByParam" resultType="com.zy.smart.domain.system.Tuser">
+        select
+        id,
+        account,
+        password,
+        user_name userName,
+        remark
+        from t_user
+        <where>
+            id = #{id,jdbcType=INTEGER}
+            and user_name = #{userName,jdbcType=VARCHAR}
+            and password = #{password,jdbcType=VARCHAR}
+        </where>
+    </select>
+
+</mapper>

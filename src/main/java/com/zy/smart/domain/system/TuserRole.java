@@ -1,34 +1,34 @@
 package com.zy.smart.domain.system;
 
 public class TuserRole {
-
+    
     private Integer id;
-
+    
     private Integer roleId;
-
-    private Integer account;
-
+    
+    private String account;
+    
     public Integer getId() {
         return id;
     }
-
+    
     public void setId(Integer id) {
         this.id = id;
     }
-
+    
     public Integer getRoleId() {
         return roleId;
     }
-
+    
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
-
-    public Integer getAccount() {
+    
+    public String getAccount() {
         return account;
     }
-
-    public void setAccount(Integer account) {
+    
+    public void setAccount(String account) {
         this.account = account;
     }
 }

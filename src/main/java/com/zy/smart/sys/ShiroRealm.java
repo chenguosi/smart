@@ -46,7 +46,7 @@ public class ShiroRealm extends AuthorizingRealm {
             List<Trole> roleList = authorService.findRoleByAccount(user.getAccount());
             List<Tmenu> menuList = authorService.findMenuByAccount(user.getAccount());
             // 获取一级菜单
-            List<Tmenu> menuOneClassList = authorService.findMenuOneClass();
+            List<Tmenu> menuOneClassList = authorService.findMenuOneClassByAccount(user.getAccount());
             user.setMenuOneClassList(menuOneClassList);
             ArrayList<String> roleStrList = new ArrayList<>();
             ArrayList<String> menuStrList = new ArrayList<>();

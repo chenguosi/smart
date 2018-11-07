@@ -1,4 +1,4 @@
-<@com.head title="修改密码">
+<head>
     <base id="base" href="${basePath!}/">
     <link href="${basePath!}/static/layui/css/layui.css" type="text/css" media="screen" rel="stylesheet"/>
     <script src="${basePath!}/static/layui/layui.js" type="text/javascript"></script>
@@ -26,15 +26,15 @@
                 },
                 success: function(data) {
                     if(data.state=='fail'){
-                        layer.alert(data.mesg);
+                        layer.alert(data.msg);
                         return false;
                     }
                     if(data.state=='success'){
                         layer.open({
-                            content: data.mesg,
+                            content: data.msg,
                             yes: function(index, layero){
                                 //do something
-                                window.location.href="${basePath!}/user/logout";
+                                window.location.href="${basePath!}/logout";
                             }
                         });
                         return false;
@@ -50,8 +50,8 @@
     });
 </script>
 
-</@com.head>
-<@com.body>
+</head>
+<body>
 
 <div class="layui-fluid">
 
@@ -94,4 +94,4 @@
 
 
 
-</@com.body>
+</body>
