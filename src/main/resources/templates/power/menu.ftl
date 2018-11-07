@@ -82,7 +82,7 @@
                                     skin: 'layui-layer-molv',
                                     type:1,
                                     area:"20%",
-                                    content:data.mesg,
+                                    content:data.msg,
                                     shadeClose:true,
                                     end: function(){
                                         layer.close(layerid);
@@ -149,7 +149,7 @@
                             skin: 'layui-layer-molv',
                             type:1,
                             area:"20%",
-                            content:data.mesg,
+                            content:data.msg,
                             shadeClose:true,
                             end: function(){
                                 layer.close(layerid);
@@ -163,7 +163,7 @@
                             skin: 'layui-layer-molv',
                             type:1,
                             area:"20%",
-                            content:data.mesg,
+                            content:data.msg,
                             shadeClose:true,
                             end: function(){
                                 layer.close(layerid);
@@ -251,7 +251,7 @@
                             skin: 'layui-layer-molv',
                             type:1,
                             area:"20%",
-                            content:data.mesg,
+                            content:data.msg,
                             shadeClose:true,
                             end: function(){
                                 layer.close(layerid);
@@ -264,7 +264,7 @@
                             skin: 'layui-layer-molv',
                             type:1,
                             area:"20%",
-                            content:data.mesg,
+                            content:data.msg,
                             shadeClose:true,
                             end: function(){
                                 layer.close(layerid);

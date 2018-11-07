@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
-
+    
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("login");
@@ -21,7 +21,7 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/error/unauthorized").setViewName("error/unauthorized");
         registry.addViewController("/main").setViewName("main");
     }
-
+    
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new CommonInterceptor()).addPathPatterns("/**");

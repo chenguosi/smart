@@ -17,6 +17,8 @@ public interface AuthorService {
 
     List<Tmenu> findMenuOneClass();
 
+    List<Tmenu> findMenuOneClassByAccount(String account);
+
     List<Tmenu> selectByParentIdAndAccount(HashMap<String, Object> paraMap);
 
     int selectChildCount(int id);

@@ -16,6 +16,9 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 用户登录
+ */
 @Controller
 @RequestMapping("user")
 public class UserController {

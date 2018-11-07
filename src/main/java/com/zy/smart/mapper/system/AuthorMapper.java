@@ -18,6 +18,8 @@ public interface AuthorMapper {
 
     List<Tmenu> findMenuOneClass();
 
+    List<Tmenu> findMenuOneClassByAccount(@Param("account") String account);
+
     List<Tmenu> selectByParentIdAndAccount(HashMap<String, Object> paraMap);
 
     int selectChildCount(@Param("id") int id);

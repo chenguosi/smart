@@ -65,7 +65,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url:"admin/user/addupdateuser",
+                        url:"admin/user/modifyUser",
                         data:$('#addeditformid').serialize(),
                         async: false,
                         error: function(request) {
@@ -73,14 +73,14 @@
                         },
                         success: function(data) {
                             if(data.state=='fail'){
-                                layer.alert(data.mesg);
+                                layer.alert(data.msg);
                             }
                             if(data.state=='success'){
                                 layer.open({
                                     skin: 'layui-layer-molv',
                                     type:1,
                                     area:"10%",
-                                    content:data.mesg,
+                                    content:data.msg,
                                     shadeClose:true,
                                     end: function(){
                                         layer.close(layerid);
@@ -118,14 +118,14 @@
                         },
                         success: function(data) {
                             if(data.state=='fail'){
-                                layer.alert(data.mesg);
+                                layer.alert(data.msg);
                             }
                             if(data.state=='success'){
                                 layer.open({
                                     skin: 'layui-layer-molv',
                                     type:1,
                                     area:"10%",
-                                    content:data.mesg,
+                                    content:data.msg,
                                     shadeClose:true,
                                     end: function(){
                                         layer.close(layerid);
@@ -154,15 +154,15 @@
                     {
                         caption: "用户管理",//表格的标题名字
                         mtype: "post",//向后台请求数据的ajax的类型。可选post,get
-                        url: 'admin/user/list',
+                        url: 'admin/user/queryUserPage',
                         //url : 'static/jqgrid/data/JSONData.json',//组件创建完成之后请求数据的url
                         //styleUI: 'Bootstrap',
                         datatype: "json",//请求数据返回的类型。可选json,xml,txt
                         emptyrecords: "当前无记录",
-                        colNames: ['ID', '用户名', '密码', '真实姓名', '备注', '拥有角色'],//jqGrid的列显示名字
+                        colNames: ['ID', '账号', '密码', '姓名', '备注', '拥有角色'],//jqGrid的列显示名字
                         colModel: [  //这里会根据index去解析jsonReader中root对象的属性，填充cell
                             {name: 'id', index: 'id', width: 100, sortable: true, search: false},
-                            {name: 'userName', index: 'userName', width: 180, sortable: false,search: true,
+                            {name: 'account', index: 'account', width: 180, sortable: false,search: true,
                                 //被该列搜索时的搜索条件有哪些
                                 searchoptions: {sopt: ['eq']}
                                 //如果使用自定义按钮点击事件的方式进行记录增删改操作的话下面的配置可以去掉
@@ -171,8 +171,8 @@
                                 editoptions: {size: "20", maxlength: "30"}//当执行修改和新增的操作时，会显示输入框，输入框的配置*/
                             },
                             {name: 'password', index: 'password', width: 200, sortable: false, search: false},
-                            {name: 'trueName', index: 'trueName', width: 180, sortable: false, search: false},
-                            {name: 'bz', index: 'bz', width: 180, sortable: false, search: false},
+                            {name: 'userName', index: 'userName', width: 180, sortable: false, search: false},
+                            {name: 'remark', index: 'remark', width: 180, sortable: false, search: false},
                             {name: 'roles', index: 'roles', width: 180, sortable: false, search: false}
                         ],
                         //如果使用自定义按钮点击事件的方式进行记录增删改操作的话下可以去掉
@@ -180,10 +180,10 @@
                         //cellsubmit: "clientArray",
                         //cellEdit:true,//启用或者禁用单元格编辑功能
                         jsonReader: {
-                            root: "datamap",//数据的根节点
-                            page: "currpage",//返回数据的当前页
-                            total: "totalpages",//总页数
-                            records: "totalrecords",//总记录数
+                            root: "dataMap",//数据的根节点
+                            page: "currentPage",//返回数据的当前页
+                            total: "totalPages",//总页数
+                            records: "totalRecords",//总记录数
                             repeatitems: false,// 如果设为false，则jqGrid在解析json时，会根据name来搜索对应的数据元素（即可以json中元素可以不按顺序）；而所使用的name是来自于colModel中的name设定。
                             id: "id"//主键字段名称
                         },
@@ -254,7 +254,7 @@
                             //请求后台，执行删除操作
                             $.ajax({
                                 type: "POST",
-                                url:"admin/user/deleteuser",
+                                url:"admin/user/deleteUser",
                                 data:{id:ret.id},
                                 async: false,
                                 error: function(request) {
@@ -262,7 +262,7 @@
                                 },
                                 success: function(data) {
                                     if(data.state=='fail'){
-                                        layer.alert(data.mesg);
+                                        layer.alert(data.msg);
                                     }
                                     if(data.state=='success'){
                                         //打开成功消息提示
@@ -270,7 +270,7 @@
                                             skin: 'layui-layer-molv',
                                             type:1,
                                             area:"10%",
-                                            content:data.mesg,
+                                            content:data.msg,
                                             shadeClose:true,
                                             end: function(){
                                                 layer.close(layerid);//消息提示结束后回调，关闭上一级新建表单所在弹层
@@ -315,7 +315,7 @@
                         },
                         success: function(data) {
                             if(data.state=='fail'){
-                                layer.alert(data.mesg);
+                                layer.alert(data.msg);
                                 return false;
                             }
                             if(data.state=='success'){
@@ -368,21 +368,21 @@
                         },
                         success: function(data) {
                             if(data.state=='fail'){
-                                layer.alert(data.mesg);
+                                layer.alert(data.msg);
                                 return false;
                             }
                             if(data.state=='success'){
                                 $("#editrolelabelid").html(ret.id);//临时存放id，当提交时再去除赋值给input
                                 var roleList=[];
                                 roleList=data.roleList;//该记录已经拥有的记录集合
-                                var notinrolelist=[];
-                                notinrolelist=data.notinrolelist;//该记录尚未拥有的记录集合
+                                var notInRoleList=[];
+                                notInRoleList=data.notInRoleList;//该记录尚未拥有的记录集合
 
                                 var strs="";
                                 $.each(roleList, function (n, value) {//n从0开始自增+1；value为每次循环的单个对象
                                     strs+='<input type="checkbox" name="role" title="'+value.name+'" value="'+value.id+'"  checked="checked">';
                                 });
-                                $.each(notinrolelist, function (n, value) {
+                                $.each(notInRoleList, function (n, value) {
                                     strs+='<input type="checkbox" name="role" title="'+value.name+'"  value="'+value.id+'" >';
                                 });
                                 $("#checkboxlistid").empty();//每次填充前都要清空所有按钮，重新填充
