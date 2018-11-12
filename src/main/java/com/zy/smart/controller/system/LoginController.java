@@ -2,7 +2,7 @@ package com.zy.smart.controller.system;
 
 import com.zy.smart.domain.system.Tmenu;
 import com.zy.smart.domain.system.Tuser;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
