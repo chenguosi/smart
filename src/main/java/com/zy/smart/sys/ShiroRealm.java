@@ -4,7 +4,7 @@ import com.zy.smart.domain.system.Tmenu;
 import com.zy.smart.domain.system.Trole;
 import com.zy.smart.domain.system.Tuser;
 import com.zy.smart.service.system.AuthorService;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;

@@ -8,7 +8,7 @@ import com.zy.smart.domain.system.Trole;
 import com.zy.smart.domain.system.TroleMenu;
 import com.zy.smart.model.JqGridBean;
 import com.zy.smart.service.system.RoleService;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
